@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Inter, Helvetica, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="520" fill="#ffffff"/>
+<text x="450" y="32" text-anchor="middle" font-size="25" font-weight="700" fill="#0f172a">WLTP Class 3b Driving Cycle</text>
+<text x="450" y="52" text-anchor="middle" font-size="14" fill="#64748b">Vehicle speed vs. time — four phases (illustrative profile)</text>
+<rect x="95.0" y="98" width="240.5" height="274.0" fill="#3b82f6" fill-opacity="0.06"/>
+<line x1="335.5" y1="98" x2="335.5" y2="372" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="335.5" y="98" width="176.8" height="274.0" fill="#10b981" fill-opacity="0.06"/>
+<line x1="512.3" y1="98" x2="512.3" y2="372" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="512.3" y="98" width="185.8" height="274.0" fill="#f59e0b" fill-opacity="0.06"/>
+<line x1="698.1" y1="98" x2="698.1" y2="372" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="698.1" y="98" width="131.9" height="274.0" fill="#ef4444" fill-opacity="0.06"/>
+<line x1="830.0" y1="98" x2="830.0" y2="372" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<line x1="95" y1="372.0" x2="830" y2="372.0" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="376.0" text-anchor="end" font-size="13" fill="#475569">0</text>
+<line x1="95" y1="332.9" x2="830" y2="332.9" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="336.9" text-anchor="end" font-size="13" fill="#475569">20</text>
+<line x1="95" y1="293.7" x2="830" y2="293.7" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="297.7" text-anchor="end" font-size="13" fill="#475569">40</text>
+<line x1="95" y1="254.6" x2="830" y2="254.6" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="258.6" text-anchor="end" font-size="13" fill="#475569">60</text>
+<line x1="95" y1="215.4" x2="830" y2="215.4" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="219.4" text-anchor="end" font-size="13" fill="#475569">80</text>
+<line x1="95" y1="176.3" x2="830" y2="176.3" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="180.3" text-anchor="end" font-size="13" fill="#475569">100</text>
+<line x1="95" y1="137.1" x2="830" y2="137.1" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="141.1" text-anchor="end" font-size="13" fill="#475569">120</text>
+<line x1="95" y1="98.0" x2="830" y2="98.0" stroke="#eef2f6" stroke-width="1"/>
+<text x="85" y="102.0" text-anchor="end" font-size="13" fill="#475569">140</text>
+<text x="95.0" y="394.0" text-anchor="middle" font-size="13" fill="#475569">0</text>
+<text x="217.5" y="394.0" text-anchor="middle" font-size="13" fill="#475569">300</text>
+<text x="340.0" y="394.0" text-anchor="middle" font-size="13" fill="#475569">600</text>
+<text x="462.5" y="394.0" text-anchor="middle" font-size="13" fill="#475569">900</text>
+<text x="585.0" y="394.0" text-anchor="middle" font-size="13" fill="#475569">1200</text>
+<text x="707.5" y="394.0" text-anchor="middle" font-size="13" fill="#475569">1500</text>
+<text x="830.0" y="394.0" text-anchor="middle" font-size="13" fill="#475569">1800</text>
+<line x1="95" y1="372" x2="830" y2="372" stroke="#0f172a" stroke-width="2"/>
+<line x1="95" y1="372" x2="95" y2="98" stroke="#0f172a" stroke-width="2"/>
+<polyline points="95.0,372.0 103.2,342.6 115.4,372.0 121.5,321.1 133.0,356.3 141.1,303.5 157.5,372.0 167.7,283.9 190.1,336.8 202.4,262.4 231.0,372.0 239.1,313.3 257.5,348.5 267.7,289.8 292.2,372.0 300.4,323.1 314.7,372.0 335.5,372.0 343.7,293.7 360.0,254.6 380.4,274.1 392.7,223.3 417.2,264.4 433.5,235.0 453.9,283.9 466.2,254.6 483.7,372.0 512.3,372.0 522.5,254.6 536.8,205.6 559.3,225.2 573.6,182.2 602.1,215.4 620.5,195.9 640.9,235.0 655.2,205.6 677.7,264.4 692.0,372.0 698.1,372.0 710.4,215.4 726.7,156.7 751.2,127.4 783.9,115.6 800.2,137.1 812.4,176.3 817.8,372.0 830.0,372.0" fill="none" stroke="#1e293b" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="215.3" y="74" text-anchor="middle" font-size="14" font-weight="700" fill="#3b82f6">Low</text>
+<text x="215.3" y="89" text-anchor="middle" font-size="11" fill="#64748b">v_max 56.5 km/h</text>
+<text x="423.9" y="74" text-anchor="middle" font-size="14" font-weight="700" fill="#10b981">Medium</text>
+<text x="423.9" y="89" text-anchor="middle" font-size="11" fill="#64748b">v_max 76.6 km/h</text>
+<text x="605.2" y="74" text-anchor="middle" font-size="14" font-weight="700" fill="#f59e0b">High</text>
+<text x="605.2" y="89" text-anchor="middle" font-size="11" fill="#64748b">v_max 97.4 km/h</text>
+<text x="764.1" y="74" text-anchor="middle" font-size="14" font-weight="700" fill="#ef4444">Extra-High</text>
+<text x="764.1" y="89" text-anchor="middle" font-size="11" fill="#64748b">v_max 131.3 km/h</text>
+<text x="462.5" y="418.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Time (s)</text>
+<text x="30" y="235.0" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a" transform="rotate(-90 30 235.0)">Speed (km/h)</text>
+<rect x="47.0" y="440" width="150" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+<text x="122.0" y="462" text-anchor="middle" font-size="12" fill="#64748b">Duration</text>
+<text x="122.0" y="484" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">1800 s</text>
+<rect x="211.0" y="440" width="150" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+<text x="286.0" y="462" text-anchor="middle" font-size="12" fill="#64748b">Distance</text>
+<text x="286.0" y="484" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">23.27 km</text>
+<rect x="375.0" y="440" width="150" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+<text x="450.0" y="462" text-anchor="middle" font-size="12" fill="#64748b">Avg speed</text>
+<text x="450.0" y="484" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">46.5 km/h</text>
+<rect x="539.0" y="440" width="150" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+<text x="614.0" y="462" text-anchor="middle" font-size="12" fill="#64748b">Max speed</text>
+<text x="614.0" y="484" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">131.3 km/h</text>
+<rect x="703.0" y="440" width="150" height="56" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+<text x="778.0" y="462" text-anchor="middle" font-size="12" fill="#64748b">Stops</text>
+<text x="778.0" y="484" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">~9</text>
+</svg>
