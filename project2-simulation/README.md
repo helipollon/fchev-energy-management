@@ -1,6 +1,6 @@
 # MAT 4902E — Graduation Project II: Plug-in FCHEV Energy Management Simulation
 
-**Author:** Ahmet Yeşil (090220359) · **Supervisor:** Prof. Dr. Semra Ahmetolan
+**Author:** Ahmet Yeşil · **Supervisor:** Prof. Dr. Semra Ahmetolan
 **Previous stage:** the MAT 4901E report (`../project1-formulation/report/MAT4901E_Report.pdf`) — mathematical formulation of the problem
 
 This directory contains the **numerical solution** of the optimal control problem
