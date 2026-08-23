@@ -1,0 +1,8 @@
+# Çekirdek bağımlılıklar — simülasyonun tamamı için yeterli
+numpy>=1.24
+matplotlib>=3.7
+
+# İsteğe bağlı: data/wltp_class3b_kmh.csv dosyasını yeniden üretmek için.
+# Resmi WLTC Class 3b izini (UN GTR 15) içerir; veri deposu içinde hazır
+# bulunduğundan normal kullanımda gerekmez.
+# wltp==0.1.2a0

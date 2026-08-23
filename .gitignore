@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# LaTeX ara dosyaları
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+
+# Ofis geçici dosyaları
+~$*
+
+# Telifli literatür — depoya dahil edilmez (bkz. bitirme1/kaynaklar/README.md)
+bitirme1/kaynaklar/*.pdf
+
+# Boş çalışma günlüğü
+bitirme2/results/run_log.txt
