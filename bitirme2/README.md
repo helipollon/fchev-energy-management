@@ -1,7 +1,7 @@
 # MAT 4902E — Bitirme Projesi II: Plug-in FCHEV Enerji Yönetimi Simülasyonu
 
 **Öğrenci:** Ahmet Yeşil (090220359) · **Danışman:** Prof. Dr. Semra Ahmetolan
-**Önceki aşama:** MAT 4901E raporu (`../bitirme1/report/MAT4901E_Report_final_v2.pdf`) — problemin matematiksel formülasyonu
+**Önceki aşama:** MAT 4901E raporu (`../bitirme1/report/MAT4901E_Report.pdf`) — problemin matematiksel formülasyonu
 
 Bu depo, Bitirme Projesi I'de (MAT 4901E) formüle edilen optimal kontrol probleminin
 **sayısal çözümünü** içerir: plug-in hidrojen yakıt pilli hibrit elektrikli araçta
@@ -682,4 +682,4 @@ Numaralama MAT 4901E raporuyla ortaktır; başlıca kullanılanlar:
 * [23] H2.LIVE, [24] BDEW — Almanya 2026 fiyatları
 
 Tam liste ve bağlantılar için MAT 4901E raporuna bakınız
-(`../bitirme1/report/MAT4901E_Report_final_v2.pdf`, Bölüm 4).
+(`../bitirme1/report/MAT4901E_Report.pdf`, Bölüm 4).
