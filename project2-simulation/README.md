@@ -7,8 +7,12 @@ This directory contains the **numerical solution** of the optimal control proble
 formulated in Graduation Project I (MAT 4901E): the implementation and comparison of
 four energy management strategies (DP, A-ECMS, MPC, BLFS) for a plug-in hydrogen fuel
 cell hybrid electric vehicle (FCHEV, based on the second-generation Toyota Mirai) inside
-a two-layer Python simulation environment. All four work packages announced in
-Section 3.7 of the report have been completed:
+a two-layer Python simulation environment.
+
+**Status: in progress.** The four work packages announced in Section 3.7 of the report
+are currently being implemented; none is finalised yet, and no comparative results are
+published in this document until they have been produced and checked. The description
+below documents the code and design decisions as they currently stand.
 
 1. A two-layer simulation environment (high-fidelity plant + simplified controller model)
 2. Metaheuristic identification of the stack coefficients by PSO and generation of the efficiency map
@@ -38,7 +42,7 @@ Section 3.7 of the report have been completed:
 cd project2-simulation
 pip install -r requirements.txt     # numpy + matplotlib is all that is needed
 cd src
-python3 run_all.py                  # reproduces every result (~2 min)
+python3 run_all.py                  # generates the current results (~2 min)
 ```
 
 When `run_all.py` finishes:
@@ -432,7 +436,8 @@ the controller believes the peak will last the whole horizon and over-protects t
 (burning fuel cell power exactly when there is an opportunity to deplete). No finite γ_mpc
 can remove this persistent model bias (the classical MPC offset problem). The standard
 remedy is integral action on the tracking error: the tracked reference is shifted by the
-low-pass-accumulated bias (`β = 0.005`, selected by a sweep — Section 7.3).
+low-pass-accumulated bias (`β = 0.005` is the current working value in `config.py`; the
+sweep that will settle it is still in progress — see Section 7).
 
 ### 4.11 `ems/blfs.py` — protection layer
 
@@ -509,61 +514,17 @@ integral action (β = 0.005). Both decisions are detailed in Section 4.10.
 
 ## 6. Results
 
-### 6.1 Default scenario (Germany 2026: 11 €/kg H₂, 0.35 €/kWh)
+**Status: in progress.** The strategy comparison (default scenario, price-scenario
+sensitivity, and the γ penalty-weight sweep) has not been finalised yet. Numerical
+results and figures will be added to this section, together with their generating
+commit, once each strategy has been implemented, tuned and checked end to end. Until
+then, no cost/SoC/efficiency figures should be treated as final — including any values
+that may appear in intermediate files under `results/`.
 
-| Strategy | Total [€] | Gap to DP | Operating [€/100km] | H₂ [g] | Electricity [kWh] | SoC_f | FC on/off | CPU [ms/step] |
-|---|---|---|---|---|---|---|---|---|
-| **DP** (benchmark) | **2.718** | — | 5.84 | 77.6 | 5.15 | 0.249 | 85 | 0.016 |
-| MPC | 2.746 | +1.0 % | 5.85 | 79.5 | 5.11 | 0.255 | 64 | 0.59 |
-| MPC+BLFS | 2.752 | +1.2 % | 5.86 | 80.0 | 5.11 | 0.255 | 50 | 0.60 |
-| A-ECMS | 2.783 | +2.4 % | 5.85 | 80.3 | 5.09 | 0.258 | 154 | 0.21 |
-| A-ECMS+BLFS | 2.795 | +2.8 % | 5.86 | 80.8 | 5.08 | 0.258 | 54 | 0.25 |
+### Figures produced so far (`results/figures/`)
 
-**Reading the table:**
-
-* The expected hierarchy is confirmed: the global optimum DP is cheapest; the real-time
-  strategies land in the 1-3 % band — consistent with the ECMS/MPC gap typically reported
-  in the literature.
-* Because grid electricity is cheaper than hydrogen on an LHV basis (as predicted in
-  Section 3.5.2 of the report), every strategy uses the battery up to its limit:
-  5.1-5.15 kWh of battery, ~78-81 g of H₂. The fuel cell only covers the deficit the
-  battery budget cannot — a numerical confirmation of the theoretical expectation.
-* **BLFS raises the cost by ~0.2-0.4 % but reduces FC on/off transitions from 154 to 54
-  and from 104 to 50, and halves the mean ramp** (654 → 306 W/step): a small monetary
-  premium for membrane life — the protection layer behaves exactly as the report predicted.
-* CPU times are far below the real-time budget (≤ 0.6 ms ≪ 1000 ms): A-ECMS and MPC are
-  production candidates, DP is offline — Table 4 of the report is confirmed.
-* The trip costs ~5.9 €/100 km; for comparison, at the same prices a hydrogen-only Mirai
-  needs ~76 kWh_H2/100km·(11/33.3) ≈ 8+ €/100 km — the economic rationale of the plug-in
-  architecture.
-
-### 6.2 Price-scenario sensitivity (Table 3 of the report)
-
-| Scenario | H₂ [€/kg] | Electricity [€/kWh] | DP [€] | A-ECMS [€] | MPC [€] |
-|---|---|---|---|---|---|
-| High | 13.85 | 0.40 | 3.203 | 3.242 | 3.228 |
-| Default | 11.00 | 0.35 | 2.718 | 2.783 | 2.746 |
-| Low | 8.00 | 0.32 | 2.325 | 2.431 | 2.361 |
-
-In all three scenarios electricity remains cheaper than hydrogen, so the structure of the
-optimal policy does not change (maximum battery use + an FC that closes the gap); the
-costs scale with the prices and the ranking of the strategies is preserved. H₂ consumption
-varies by only ±2 % between scenarios — in this region the policy is insensitive to the
-price ratio (the constraint binds: the battery budget is already exhausted).
-
-### 6.3 γ penalty-weight sweep (DP)
-
-| γ [€] | 100 | 300 | 1000 | 3000 | 10000 |
-|---|---|---|---|---|---|
-| SoC_f | 0.2395 | 0.2449 | 0.2494 | 0.2495 | 0.2495 |
-| Operating cost [€] | 2.694 | 2.706 | 2.717 | 2.721 | 2.726 |
-
-γ = 1000 (the report's choice, based on dimensional analysis, Eq. 23): the terminal error
-drops below 0.001 while the operating cost has not yet inflated — **the report's choice is
-confirmed by the sweep.** Below γ = 300 the controller "buys" the penalty and misses the
-target; above γ = 3000 there is no gain and the cost stiffens.
-
-### 6.4 Figures (`results/figures/`)
+The figures below are produced by `run_all.py` as work-in-progress diagnostics while each
+component is being built; they are not yet final results.
 
 | File | Contents |
 |---|---|
@@ -571,62 +532,40 @@ target; above γ = 3000 there is no gain and the cost stiffens.
 | fig02_polarization_pso.png | Polarization fit (data/identified/nominal) + PSO convergence |
 | fig03_efficiency_map.png | Stack LHV efficiency and tank-to-bus system efficiency; system peak marked |
 | fig04_ocv_hysteresis.png | LFP OCV charge/discharge branches, hysteresis band, operating window |
-| fig05_soc_trajectories.png | SoC trajectories of the 5 strategies + the energy-based reference |
+| fig05_soc_trajectories.png | SoC trajectories of the strategies implemented so far + the energy-based reference |
 | fig06_pdc_profiles.png | P_dc(t) profiles per strategy (load shaded) |
 | fig07_cost_breakdown.png | Cost decomposition: H₂ / electricity / terminal penalty |
-| fig08_sensitivity.png | Total cost for 3 price scenarios × 5 strategies |
+| fig08_sensitivity.png | Total cost across price scenarios and strategies |
 | fig09_gamma_sweep.png | Terminal SoC and operating cost versus γ (DP) |
 
 ---
 
 ## 7. Tuning process
 
-All tuning experiments were run in the default scenario with the same seeds; the final
-values sit in `config.py` with justifying comments.
-
-### 7.1 What was left untuned
-
-No parameter of DP or of the models was tuned (they come from the report and the primary
-sources). The grid resolutions are the values stated in the report
-(ΔSoC = 0.005, ΔP_dc = 1 kW).
-
-### 7.2 A-ECMS PI gains
-
-| (k_p, k_i) | Total [€] | SoC_f | Note |
-|---|---|---|---|
-| (60, 0.1) | 3.198 | 0.227 | loose tracking, large terminal penalty |
-| **(150, 0.3)** | **2.783** | **0.258** | selected |
-| (300, 0.5) | 3.144 | 0.270 | overly aggressive, FC burns unnecessarily |
-| (150, 1.0) | 3.064 | 0.267 | integral-dominated, oscillatory |
-
-### 7.3 MPC offset-free integral gain β
-
-| β | 0 | 0.005 | 0.01 | 0.02 |
-|---|---|---|---|---|
-| Total [€] | 3.013 | **2.746** | 3.011 | 3.220 |
-| SoC_f | 0.267 | 0.255 | 0.266 | 0.272 |
-
-β must be small but non-zero: 0.005 filters the residual bias; a large β shakes the
-reference with noise and destabilises the FC. γ_mpc was kept at 200 (a 200→5000 sweep did
-not change SoC_f — proof that the offset problem is solved by integral action and not by
-weighting, see Section 4.10).
+**Status: in progress.** Controller parameters (e.g. the A-ECMS PI gains and the MPC
+offset-free integral gain β) are still being swept and adjusted as each strategy is
+implemented. `config.py` holds the current working values with comments explaining the
+reasoning so far; they are not yet final and will keep changing until each strategy's
+tuning is closed out. A record of the tuning sweeps and the selected values will be added
+here once settled.
 
 ---
 
 ## 8. Verification and sanity checks
+
+The checks below validate individual model components already implemented; they do not
+depend on the full strategy comparison and are kept up to date as development proceeds.
+End-to-end checks that require all four strategies (e.g. optimality ordering across
+strategies) will be added once the comparison itself is finalised (see Section 6).
 
 1. **Cycle verification:** 46.53 km ≈ 2×23.27 km (the official GTR 15 value);
    traction 8.56 kWh (≈ 184 Wh/km — consistent with D-segment BEV consumption under WLTP).
 2. **Battery energy balance:** 10 kW × 10 min discharge → ΔSoC·E_nom = 1.672 kWh versus
    1.667 kWh supplied (0.3 %, internal losses). Battery-only test over the full trip:
    ΔSoC = 0.851 ↔ the net flow of 8.56−2.12 kWh measured in the plant — it closes.
-3. **DP internal consistency:** backward-pass prediction (2.733 €) versus closed loop in
-   the plant (2.718 €): 0.5 % — the share of the interpolated policy plus model mismatch.
-4. **Optimality ordering:** DP ≤ MPC ≤ A-ECMS in all three scenarios (no real-time
-   strategy beats the benchmark — that would have signalled a bug).
-5. **PSO:** improvement < 0.1 mV over the last 60 of 150 iterations (convergence, fig02);
+3. **PSO:** improvement < 0.1 mV over the last 60 of 150 iterations (convergence, fig02);
    RMSE 6.4 mV ≈ twice the injected 3 mV noise floor (no overfitting).
-6. **Boundary tests:** regeneration clipping near SoC_max (the fix for the V₀ = inf bug,
+4. **Boundary tests:** regeneration clipping near SoC_max (the fix for the V₀ = inf bug,
    Section 4.7); u = 0 over the whole trip → SoC 0.053 (window violation) → the fuel cell
    is mandatory.
 
