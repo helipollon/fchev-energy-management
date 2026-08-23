@@ -1,121 +1,121 @@
-# Plug-in Hidrojen Yakıt Pilli Hibrit Araçlarda (FCHEV) Enerji Yönetimi
+# Energy Management for Plug-in Fuel Cell Hybrid Electric Vehicles (FCHEV)
 
-**Matematiksel modelleme, optimal kontrol formülasyonu ve sayısal çözüm**
+**Mathematical modelling, optimal control formulation and numerical solution**
 
-İstanbul Teknik Üniversitesi — Matematik Mühendisliği
-Bitirme Projesi I (MAT 4901E) ve Bitirme Projesi II (MAT 4902E), 2026
+Istanbul Technical University — Department of Mathematical Engineering
+Graduation Project I (MAT 4901E) and Graduation Project II (MAT 4902E), 2026
 
-**Öğrenci:** Ahmet Yeşil (090220359) · **Danışman:** Prof. Dr. Semra Ahmetolan
+**Author:** Ahmet Yeşil (090220359) · **Supervisor:** Prof. Dr. Semra Ahmetolan
 
 ---
 
-## Proje özeti
+## Overview
 
-Plug-in hidrojen yakıt pilli hibrit elektrikli bir araçta (Toyota Mirai II tabanlı
-FCHEV) yakıt pili ile batarya arasındaki güç paylaşımı, bir **optimal kontrol
-problemi** olarak kurulur ve sayısal olarak çözülür. Tek karar değişkeni DC/DC
-dönüştürücünün baraya verdiği güç `u(t) = P_dc(t)`, tek durum değişkeni bataryanın
-şarj durumu `SoC`'dur. Amaç, WLTP referans gezisi boyunca toplam parasal maliyeti
-(hidrojen + şebeke elektriği + terminal SoC cezası) en aza indirmektir:
+The power split between the fuel cell and the battery of a plug-in hydrogen fuel cell
+hybrid electric vehicle (an FCHEV based on the second-generation Toyota Mirai) is posed
+as an **optimal control problem** and solved numerically. The single decision variable is
+the power the DC/DC converter delivers to the bus, `u(t) = P_dc(t)`; the single state is
+the battery state of charge, `SoC`. The objective is to minimise the total monetary cost
+of a reference trip — hydrogen, grid-equivalent electricity and a terminal SoC penalty:
 
 ```
-min  Σ L_k(SoC_k, P_dc,k) + γ (SoC_N − 0.25)²      L_k = C_yakıt pili,k + C_batarya,k
+min  Σ L_k(SoC_k, P_dc,k) + γ (SoC_N − 0.25)²      L_k = C_fuel-cell,k + C_battery,k
 ```
 
-Depo iki aşamadan oluşur:
+The repository covers both stages of the project:
 
-| Aşama | İçerik |
+| Stage | Contents |
 |---|---|
-| **[`bitirme1/`](bitirme1/)** — MAT 4901E | Literatür taraması, araç/yakıt pili/batarya modellerinin matematiksel türetimi, optimal kontrol probleminin formülasyonu, çözüm stratejilerinin seçimi. Rapor + savunma sunumu. |
-| **[`bitirme2/`](bitirme2/)** — MAT 4902E | Formülasyonun Python'da sayısal çözümü: iki katmanlı simülasyon ortamı, yığın katsayılarının PSO ile tanılanması ve dört enerji yönetim stratejisinin (DP, A-ECMS, MPC, BLFS) karşılaştırılması. Kod + rapor. |
+| **[`project1-formulation/`](project1-formulation/)** — MAT 4901E | Literature review, mathematical derivation of the vehicle, fuel cell and battery models, formulation of the optimal control problem, and selection of the solution strategies. Report + defence presentation. |
+| **[`project2-simulation/`](project2-simulation/)** — MAT 4902E | Numerical solution in Python: a two-layer simulation environment, identification of the stack coefficients by particle swarm optimisation, and a comparison of four energy management strategies (DP, A-ECMS, MPC, BLFS). Code + report. |
 
 ---
 
-## Ana sonuçlar
+## Headline results
 
-Varsayılan fiyat senaryosunda (11 €/kg H₂, 0.35 €/kWh), 2×WLTC Class 3b referans gezisi:
+Default price scenario (11 €/kg H₂, 0.35 €/kWh), reference trip of 2×WLTC Class 3b:
 
-| Strateji | Toplam maliyet [€] | DP'ye fark | H₂ [g] | Elektrik [kWh] | FC aç/kapa | CPU [ms/adım] |
+| Strategy | Total cost [€] | Gap to DP | H₂ [g] | Electricity [kWh] | FC on/off | CPU [ms/step] |
 |---|---|---|---|---|---|---|
-| **DP** (küresel kıyas ölçütü) | **2.718** | — | 77.6 | 5.15 | 85 | 0.016 |
-| MPC | 2.746 | +%1.0 | 79.5 | 5.11 | 64 | 0.59 |
-| MPC + BLFS | 2.752 | +%1.2 | 80.0 | 5.11 | 50 | 0.60 |
-| A-ECMS | 2.783 | +%2.4 | 80.3 | 5.09 | 154 | 0.21 |
-| A-ECMS + BLFS | 2.795 | +%2.8 | 80.8 | 5.08 | 54 | 0.25 |
+| **DP** (global benchmark) | **2.718** | — | 77.6 | 5.15 | 85 | 0.016 |
+| MPC | 2.746 | +1.0 % | 79.5 | 5.11 | 64 | 0.59 |
+| MPC + BLFS | 2.752 | +1.2 % | 80.0 | 5.11 | 50 | 0.60 |
+| A-ECMS | 2.783 | +2.4 % | 80.3 | 5.09 | 154 | 0.21 |
+| A-ECMS + BLFS | 2.795 | +2.8 % | 80.8 | 5.08 | 54 | 0.25 |
 
-* Gerçek zamanlı stratejiler küresel optimumun **%1-3** bandında kalır — literatürdeki
-  tipik ECMS/MPC boşluğuyla uyumlu.
-* BLFS koruma katmanı maliyeti ~%0.2-0.4 artırırken yakıt pili aç/kapa sayısını
-  **154 → 54**'e düşürür: membran ömrü için küçük parasal prim.
-* Tüm çevrim içi stratejiler ≤ 0.6 ms/adım — 1 s'lik gerçek zaman bütçesinin çok altında.
+* The real-time strategies stay within **1–3 %** of the global optimum — consistent with
+  the ECMS/MPC gap typically reported in the literature.
+* The BLFS protection layer costs about 0.2–0.4 % extra but cuts fuel cell on/off
+  transitions from **154 to 54** and halves the mean ramp rate: a small monetary premium
+  paid for membrane durability.
+* Every online strategy runs at ≤ 0.6 ms per step, far inside the 1 s real-time budget.
 
-Ayrıntılı analiz, fiyat senaryosu duyarlılığı ve γ taraması için
-[`bitirme2/README.md`](bitirme2/README.md) (tam kod dokümantasyonu) ve
-`bitirme2/MAT4902_GraduationProject2_Report.pdf` dosyalarına bakınız.
+For the detailed analysis, price-scenario sensitivity and the γ sweep, see
+[`project2-simulation/README.md`](project2-simulation/README.md) (full code documentation)
+and `project2-simulation/MAT4902_GraduationProject2_Report.pdf`.
 
 ---
 
-## Hızlı başlangıç
+## Quick start
 
 ```bash
-git clone https://github.com/<kullanıcı-adı>/fchev-energy-management.git
-cd fchev-energy-management/bitirme2
+git clone https://github.com/<username>/fchev-energy-management.git
+cd fchev-energy-management/project2-simulation
 pip install -r requirements.txt      # numpy + matplotlib
 cd src
-python3 run_all.py                   # tüm sonuçları ve şekilleri yeniden üretir (~2 dk)
+python3 run_all.py                   # reproduces every result and figure (~2 min)
 ```
 
-Rastgele süreçler sabit tohumludur (`seed=42`, `seed=7`); kod iki kez
-çalıştırıldığında bit düzeyinde aynı sonuçları verir.
+Both stochastic steps (measurement noise in the polarization data and the PSO swarm
+initialisation) use fixed seeds (`seed=42`, `seed=7`), so two runs are bit-for-bit identical.
 
 ---
 
-## Klasör yapısı
+## Repository layout
 
 ```
 .
-├── bitirme1/                        MAT 4901E — formülasyon
-│   ├── report/                      rapor (final + taslak, .pdf ve .docx)
-│   ├── presentation/                savunma sunumu (Beamer .tex + .pptx)
-│   ├── figures/                     WLTP profili, OCV-SoC düz bölge şekilleri
-│   └── kaynaklar/                   literatür listesi (PDF'ler telif nedeniyle hariç)
+├── project1-formulation/            MAT 4901E — modelling and formulation
+│   ├── report/                      submitted report (+ drafts/)
+│   ├── presentation/                defence talk (Beamer .tex + .pptx)
+│   ├── figures/                     WLTP profile, OCV–SoC flat-zone figures
+│   └── references/                  list of the literature used (PDFs not redistributed)
 │
-└── bitirme2/                        MAT 4902E — sayısal çözüm
-    ├── src/                         simülasyon ve EMS kodu
+└── project2-simulation/             MAT 4902E — numerical solution
+    ├── src/                         simulation and EMS code
     │   └── ems/                     dp.py · aecms.py · mpc.py · blfs.py
-    ├── data/                        WLTC hız izi, polarizasyon verisi, PSO çıktısı
-    ├── results/                     csv/json sonuçlar + figures/fig01…fig09.png
-    ├── docs/                        ders notu, kaynakça, rapor üreteci
-    └── README.md                    modül modül tam kod dokümantasyonu
+    ├── data/                        WLTC speed trace, polarization data, PSO output
+    ├── results/                     csv/json results + figures/fig01…fig09.png
+    ├── docs/                        bibliography, report generator
+    └── README.md                    module-by-module code documentation
 ```
 
 ---
 
-## Yöntemler
+## Methods
 
-* **Yakıt pili:** Mann–Amphlett genelleştirilmiş kararlı-hal elektrokimyasal modeli (GSSEM);
-  katsayılar Parçacık Sürü Optimizasyonu (PSO) ile polarizasyon verisine tanılanmıştır.
-* **Batarya:** 1-RC eşdeğer devre + OCV histerezisi (LFP), ayrıca Rint modeli.
-* **Sürüş çevrimi:** UN GTR No. 15 WLTC Class 3b (1 Hz, resmi hız izi).
-* **Enerji yönetimi:** Dinamik Programlama (çevrimdışı küresel kıyas), Uyarlamalı ECMS,
-  Model Öngörülü Kontrol, Sınır Katmanı Yüzey İzleme (koruma katmanı).
+* **Fuel cell:** Mann–Amphlett generalised steady-state electrochemical model (GSSEM);
+  the coefficients are identified against polarization data by particle swarm optimisation.
+* **Battery:** 1-RC equivalent circuit with OCV hysteresis (LFP), plus an Rint model.
+* **Drive cycle:** UN GTR No. 15 WLTC Class 3b (official 1 Hz speed trace).
+* **Energy management:** Dynamic Programming (offline global benchmark), Adaptive ECMS,
+  Model Predictive Control, and Boundary Layer Surface Following (protection layer).
 
-## Lisans
+## Licence
 
-Kod [MIT Lisansı](LICENSE) ile sunulmaktadır. `bitirme1/report`, `bitirme2/docs` ve
-rapor PDF'lerindeki metin, şekil ve analizler yazarın akademik çalışmasıdır;
-atıf vererek kullanılabilir. `bitirme1/kaynaklar/` altındaki üçüncü taraf yayınlar
-telifli oldukları için depoya dahil edilmemiştir.
+The code is released under the [MIT Licence](LICENSE). The text, figures and analysis in
+the reports and documentation are the author's academic work and may be used with
+attribution. Third-party publications under `project1-formulation/references/` are
+copyrighted and are therefore **not** included in this repository.
 
-## Atıf
+## Citation
 
 ```bibtex
 @mastersthesis{yesil2026fchev,
   author = {Ye{\c{s}}il, Ahmet},
-  title  = {Plug-in Hidrojen Yak{\i}t Pilli Hibrit Ara{\c{c}}larda Enerji Y{\"o}netimi:
-            Matematiksel Modelleme ve Optimal Kontrol},
-  school = {{\.I}stanbul Teknik {\"U}niversitesi, Matematik M{\"u}hendisli{\u{g}}i},
+  title  = {Mathematical Modeling and Control Strategies for Hybrid Hydrogen Systems},
+  school = {Istanbul Technical University, Department of Mathematical Engineering},
   year   = {2026},
-  note   = {Bitirme Projesi I--II (MAT 4901E / MAT 4902E)}
+  note   = {Graduation Project I--II (MAT 4901E / MAT 4902E)}
 }
 ```

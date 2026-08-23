@@ -13,7 +13,7 @@ venv/
 env/
 .ipynb_checkpoints/
 
-# LaTeX ara dosyaları
+# LaTeX build artefacts
 *.aux
 *.log
 *.nav
@@ -27,11 +27,14 @@ env/
 *.bbl
 *.blg
 
-# Ofis geçici dosyaları
+# Office lock files
 ~$*
 
-# Telifli literatür — depoya dahil edilmez (bkz. bitirme1/kaynaklar/README.md)
-bitirme1/kaynaklar/*.pdf
+# Third-party publications — not redistributed (see project1-formulation/references/README.md)
+project1-formulation/references/*.pdf
 
-# Boş çalışma günlüğü
-bitirme2/results/run_log.txt
+# Personal Turkish study notes — kept locally, not published
+project2-simulation/docs/DERS_NOTU.md
+
+# Empty run log
+project2-simulation/results/run_log.txt
