@@ -5,7 +5,7 @@
 Istanbul Technical University — Department of Mathematical Engineering
 Graduation Project I (MAT 4901E) and Graduation Project II (MAT 4902E), 2026
 
-**Author:** Ahmet Yeşil (090220359) · **Supervisor:** Prof. Dr. Semra Ahmetolan
+**Author:** Ahmet Yeşil 
 
 ---
 
