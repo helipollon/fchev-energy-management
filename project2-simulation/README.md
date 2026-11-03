@@ -99,16 +99,12 @@ BLFS start threshold `α = 1.1`, hold time 60 s; MPC terminal weight `γ_mpc = 3
 ## 4. Result files
 
 Costs are in €, powers in kW unless the column name says otherwise, SoC is a fraction (0–1).
-Some file names keep the Turkish names of the project's working copy: *ozet* summary,
-*egitim / test* training / test, *ac_kapa_bedeli* start/stop charge, *duyarlilik* sensitivity,
-*odunlesim* trade-off, *dayaniklilik* robustness, *izler* traces, *denetci_etkisi* effect of the
-supervisor, *son_yaklasma* final approach.
 
 ### `results/evaluation/` — training / test evaluation
 
 | File | Contents |
 |---|---|
-| `egitim_test_ozet_v9.csv` | **Main table:** 9 trips × 5 strategies (DP, A-ECMS, A-ECMS+BLFS, MPC, MPC+BLFS) |
+| `evaluation_summary_v9.csv` | **Main table:** 9 trips × 5 strategies (DP, A-ECMS, A-ECMS+BLFS, MPC, MPC+BLFS) |
 | `eval2_distance_<trip>.csv` | The same rows, one file per trip (the main table is these nine files stacked) |
 
 Columns: `cost_run` energy cost (hydrogen + electricity), `cost_sw` start/stop charges,
@@ -141,27 +137,27 @@ part of the traction demand unmet.
 
 | File | Contents |
 |---|---|
-| `ac_kapa_bedeli_duyarlilik.csv` | Charge × 0.2 … 25 (`factor`, `p_kg` kg H2 per action): DP and A-ECMS + BLFS |
-| `odunlesim_dp.csv`, `fig_odunlesim.png` | DP trade-off between energy cost and number of starts (charge × 0 … 1) |
+| `switching_cost_sensitivity.csv` | Charge × 0.2 … 25 (`factor`, `p_kg` kg H2 per action): DP and A-ECMS + BLFS |
+| `tradeoff_dp.csv`, `fig_tradeoff.png` | DP trade-off between energy cost and number of starts (charge × 0 … 1) |
 
 ### `results/robustness/` — robustness of the supervisor
 
 | File | Contents |
 |---|---|
-| `dayaniklilik.csv` | Scenarios R0 nominal, R1/R2 trip 30 % longer/shorter than planned, R3/R4 gains ÷ 10 / ÷ 100, R5 no upper-level command; with and without BLFS (`*_blfs` columns); `band_s`, `mp_s`, `ramp_s` seconds BLFS spent in each mode |
+| `robustness_scenarios.csv` | Scenarios R0 nominal, R1/R2 trip 30 % longer/shorter than planned, R3/R4 gains ÷ 10 / ÷ 100, R5 no upper-level command; with and without BLFS (`*_blfs` columns); `band_s`, `mp_s`, `ramp_s` seconds BLFS spent in each mode |
 | `blfs_nominal.csv` | When and how often BLFS intervenes on the nominal trips |
 
 ### `results/demo/` — second-by-second traces
 
-`demo_train_2xWLTC3b_izler.csv`, `demo_test_3xUS06_izler.csv`: time, speed, `P_load`, and `P_dc` and
+`traces_train_2xWLTC3b.csv`, `traces_test_3xUS06.csv`: time, speed, `P_load`, and `P_dc` and
 SoC of DP, A-ECMS+BLFS, MPC+BLFS and A-ECMS for every second of the trip.
 
-### `results/note_figures/` — figures of the study notes
+### `results/note_figures/` — figures of the study notes (axis labels and titles in Turkish)
 
 `n1_trip` load of the training trip, `n2_dp_policy` DP decision map, `n3_hamiltonian` A-ECMS
 Hamiltonian, `n4_soc` SoC trajectories, `n5_pdc` fuel-cell power, `n6_s` equivalence factor,
-`n7_denetci_etkisi` effect of the supervisor, `n8_blfs_r5` BLFS without an upper-level command,
-`n9_son_yaklasma` last 150 s of a trip, braking to standstill and the approach to the target SoC; `numbers.json` the numbers quoted in the notes.
+`n7_supervisor_effect` effect of the supervisor, `n8_blfs_r5` BLFS without an upper-level command,
+`n9_final_approach` last 150 s of a trip, braking to standstill and the approach to the target SoC; `numbers.json` the numbers quoted in the notes.
 
 ---
 

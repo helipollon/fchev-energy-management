@@ -72,7 +72,7 @@ only; the development trips guided the design; no setting was chosen on the held
 * The mean computation time of one decision step is at most 0.17 ms (A-ECMS + BLFS) and
   0.54 ms (MPC + BLFS) over the nine trips, at a sampling interval of 1 s.
 
-Source: [`project2-simulation/results/evaluation/egitim_test_ozet_v9.csv`](project2-simulation/results/evaluation/egitim_test_ozet_v9.csv).
+Source: [`project2-simulation/results/evaluation/evaluation_summary_v9.csv`](project2-simulation/results/evaluation/evaluation_summary_v9.csv).
 
 ---
 
