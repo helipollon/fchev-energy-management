@@ -16,8 +16,7 @@ in [`../project2-simulation/`](../project2-simulation/).
 |---|---|
 | **`report/MAT4901E_Report.pdf`** | **Submitted final report** (22 pages) |
 | `report/drafts/` | Earlier versions (`_v1`, `_v2`; PDF and editable .docx sources) |
-| `presentation/presentation.tex` | Defence presentation — Beamer source (TikZ/pgfplots, no external figures needed) |
-| `presentation/FCHEV_Presentation.pptx` | PowerPoint version of the talk |
+| `presentation/FCHEV Presentation.pdf` | Defence presentation (PDF) |
 | `figures/` | WLTP speed profile and OCV–SoC flat-zone figures |
 | `references/` | List of the 22 sources used (PDFs not redistributed — see the folder README) |
 
@@ -30,10 +29,3 @@ in [`../project2-simulation/`](../project2-simulation/).
    of the powertrain components, power flow model, derivation of the cost function,
    EMS methods (DP, A-ECMS, MPC, BLFS), and the work plan for Graduation Project II
 4. References (24 entries)
-
-## Building the presentation
-
-```bash
-cd presentation
-pdflatex -shell-escape presentation.tex   # run twice
-```

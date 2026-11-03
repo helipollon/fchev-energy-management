@@ -1,0 +1,17 @@
+{
+ "A-ECMS": {
+  "kp": 200.0,
+  "ki": 0.001,
+  "sw_horizon": 0.0,
+  "rho": 1.0,
+  "kappa": 0.4,
+  "gap_mean_pct": 1.485655,
+  "worst_neighbour_pct": 1.725425
+ },
+ "BLFS": {
+  "alpha": 1.1,
+  "t_hold": 60.0,
+  "start_gate": true
+ },
+ "note": "tune4.py, training trips only, objective includes the on/off switching cost"
+}

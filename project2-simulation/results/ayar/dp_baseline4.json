@@ -1,0 +1,14 @@
+{
+ "train_2xWLTC3b": {
+  "cost_total": 4.025280836749753,
+  "cost_run": 3.763238485259843,
+  "fc_starts": 1,
+  "soc_final": 0.24857089136525276
+ },
+ "train_3xWLTC3b": {
+  "cost_total": 6.409111206265699,
+  "cost_run": 6.146962064954008,
+  "fc_starts": 1,
+  "soc_final": 0.24853400500966372
+ }
+}

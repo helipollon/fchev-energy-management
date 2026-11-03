@@ -1,0 +1,10 @@
+{
+ "MPC": {
+  "gamma_mpc": 300.0,
+  "beta_int": 0.0,
+  "Np": 15,
+  "gap_mean_pct": 1.5634299999999999,
+  "worst_neighbour_pct": 2.117365
+ },
+ "note": "tune5.py, MPC + BLFS, training trips only, objective includes the on/off switching cost; offset-free term switched off (beta_int = 0)"
+}

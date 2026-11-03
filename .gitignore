@@ -38,3 +38,12 @@ project2-simulation/docs/DERS_NOTU.md
 
 # Empty run log
 project2-simulation/results/run_log.txt
+
+# No code in this repository: reports, results and documentation only (3 Nov 2026)
+*.py
+*.js
+*.tex
+*.ipynb
+*.m
+*.sh
+requirements*.txt
