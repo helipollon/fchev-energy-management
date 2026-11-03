@@ -15,7 +15,6 @@ in [`../project2-simulation/`](../project2-simulation/).
 | File | Description |
 |---|---|
 | **`report/MAT4901E_Report.pdf`** | **Submitted final report** (22 pages) |
-| `report/drafts/` | Earlier versions (`_v1`, `_v2`; PDF and editable .docx sources) |
 | `presentation/FCHEV Presentation.pdf` | Defence presentation (PDF) |
 | `figures/` | WLTP speed profile and OCV–SoC flat-zone figures |
 | `references/` | List of the 22 sources used (PDFs not redistributed — see the folder README) |

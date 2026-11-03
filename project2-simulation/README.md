@@ -98,10 +98,13 @@ BLFS start threshold `α = 1.1`, hold time 60 s; MPC terminal weight `γ_mpc = 3
 
 ## 4. Result files
 
-Folder names are Turkish (as in the project's working copy). Costs are in €, powers in kW unless
-the column name says otherwise, SoC is a fraction (0–1).
+Costs are in €, powers in kW unless the column name says otherwise, SoC is a fraction (0–1).
+Some file names keep the Turkish names of the project's working copy: *ozet* summary,
+*egitim / test* training / test, *ac_kapa_bedeli* start/stop charge, *duyarlilik* sensitivity,
+*odunlesim* trade-off, *dayaniklilik* robustness, *izler* traces, *denetci_etkisi* effect of the
+supervisor, *son_yaklasma* final approach.
 
-### `results/egitim_test/` — training / test evaluation
+### `results/evaluation/` — training / test evaluation
 
 | File | Contents |
 |---|---|
@@ -115,7 +118,7 @@ time of one decision step; `dist_km`, `duration_s`; `u_below_me` seconds with th
 below its lowest operating point; `unmet_s` seconds in which the battery current limit left
 part of the traction demand unmet.
 
-### `results/ayar/` — tuning (training trips only)
+### `results/tuning/` — tuning (training trips only)
 
 | File | Contents |
 |---|---|
@@ -124,7 +127,7 @@ part of the traction demand unmet.
 | `tuned_settings4_distance.json`, `tuned_settings5_distance.json` | Selected settings with their mean and worst-neighbour gap |
 | `dp_baseline4.json` | DP results of the training trips used as the reference during tuning |
 
-### `results/varsayilan_senaryo/` — default trip (2 × WLTC Class 3b)
+### `results/default_scenario/` — default trip (2 × WLTC Class 3b)
 
 | File | Contents |
 |---|---|
@@ -134,14 +137,14 @@ part of the traction demand unmet.
 | `gamma_sweep.json` | DP for different terminal-penalty weights `γ` |
 | `figures/fig01…fig09.png` | Load trajectory, polarization fit (PSO), efficiency map, OCV hysteresis, SoC trajectories, `P_dc` profiles, cost breakdown, price sensitivity, `γ` sweep |
 
-### `results/duyarlilik/` — sensitivity to the start/stop charge
+### `results/sensitivity/` — sensitivity to the start/stop charge
 
 | File | Contents |
 |---|---|
 | `ac_kapa_bedeli_duyarlilik.csv` | Charge × 0.2 … 25 (`factor`, `p_kg` kg H2 per action): DP and A-ECMS + BLFS |
 | `odunlesim_dp.csv`, `fig_odunlesim.png` | DP trade-off between energy cost and number of starts (charge × 0 … 1) |
 
-### `results/dayaniklilik/` — robustness of the supervisor
+### `results/robustness/` — robustness of the supervisor
 
 | File | Contents |
 |---|---|
@@ -153,7 +156,7 @@ part of the traction demand unmet.
 `demo_train_2xWLTC3b_izler.csv`, `demo_test_3xUS06_izler.csv`: time, speed, `P_load`, and `P_dc` and
 SoC of DP, A-ECMS+BLFS, MPC+BLFS and A-ECMS for every second of the trip.
 
-### `results/not_sekilleri/` — figures of the study notes
+### `results/note_figures/` — figures of the study notes
 
 `n1_trip` load of the training trip, `n2_dp_policy` DP decision map, `n3_hamiltonian` A-ECMS
 Hamiltonian, `n4_soc` SoC trajectories, `n5_pdc` fuel-cell power, `n6_s` equivalence factor,

@@ -72,7 +72,7 @@ only; the development trips guided the design; no setting was chosen on the held
 * The mean computation time of one decision step is at most 0.17 ms (A-ECMS + BLFS) and
   0.54 ms (MPC + BLFS) over the nine trips, at a sampling interval of 1 s.
 
-Source: [`project2-simulation/results/egitim_test/egitim_test_ozet_v9.csv`](project2-simulation/results/egitim_test/egitim_test_ozet_v9.csv).
+Source: [`project2-simulation/results/evaluation/egitim_test_ozet_v9.csv`](project2-simulation/results/evaluation/egitim_test_ozet_v9.csv).
 
 ---
 
@@ -81,7 +81,7 @@ Source: [`project2-simulation/results/egitim_test/egitim_test_ozet_v9.csv`](proj
 ```
 .
 ├── project1-formulation/            MAT 4901E — modelling and formulation
-│   ├── report/                      submitted report (+ drafts/)
+│   ├── report/                      submitted report
 │   ├── presentation/                defence presentation (PDF)
 │   ├── figures/                     WLTP profile, OCV–SoC flat-zone figures
 │   └── references/                  list of the literature used (PDFs not redistributed)
